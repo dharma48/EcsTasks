@@ -1,5 +1,6 @@
 {
     "taskDefinitionArn": "arn:aws:ecs:us-east-1:928198177604:task-definition/Status:14",
+    "taskRoleArn": "arn:aws:iam::928198177604:role/EcsTaskRole",
     "containerDefinitions": [
         {
             "name": "uptime-kuma",
