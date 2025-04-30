@@ -44,9 +44,6 @@
                 }
             ],
             "essential": true,
-            "restartPolicy": {
-                "enabled": true
-            },
             "environment": [
                 {
                     "name": "TS_EXTRA_ARGS",
@@ -139,6 +136,5 @@
     },
     "registeredAt": "2025-04-06T16:45:48.167Z",
     "registeredBy": "arn:aws:sts::928198177604:assumed-role/AWSReservedSSO_AdministratorAccess_45f38d0dea1e89b2/clintkev251",
-    "enableFaultInjection": false,
     "tags": []
 }
