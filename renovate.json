@@ -23,7 +23,7 @@
       "datasourceTemplate": "docker",
       "fileMatch": ["^task-definition.json$"],
       "matchStrings": [
-        "^\\"image\\": \\"(?<depName>.*\\\/.*):(?<currentValue>.*?)\\",$"
+        "^.image.: .(?<depName>.*\\\/.*):(?<currentValue>.*?).,$"
       ]
     }
   ]
