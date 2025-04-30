@@ -16,5 +16,15 @@
       "username": "clintkev251",
       "password": "{{ secrets.dockerhubKey }}"
     }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "datasourceTemplate": "docker",
+      "fileMatch": ["^task-definition.json$"],
+      "matchStrings": [
+        "#\\s?renovate: image=(?<depName>.*?)\\s?appVersion:\\s?\\\"?(?<currentValue>[\\w+\\.\\-]*)\""
+      ]
+    }
   ]
 }
