@@ -21,9 +21,9 @@
     {
       "customType": "regex",
       "datasourceTemplate": "docker",
-      "fileMatch": ["^task-definition.json$"],
+      "fileMatch": ["^.*task-definition.json.*$"],
       "matchStrings": [
-        "^.image.: .(?<depName>.*\\\/.*):(?<currentValue>.*?).,$"
+        "^\\s*.image.: .(?<depName>.*\\\/.*):(?<currentValue>.*?).,$"
       ]
     }
   ]
