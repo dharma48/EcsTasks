@@ -1,0 +1,144 @@
+{
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:928198177604:task-definition/Status:14",
+    "containerDefinitions": [
+        {
+            "name": "uptime-kuma",
+            "image": "ghcr.io/louislam/uptime-kuma:2.0.0-beta.2",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "uptime-kuma-3001-tcp",
+                    "containerPort": 3001,
+                    "hostPort": 3001,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [],
+            "mountPoints": [
+                {
+                    "sourceVolume": "config",
+                    "containerPath": "/app/data",
+                    "readOnly": false
+                }
+            ],
+            "volumesFrom": [],
+            "systemControls": []
+        },
+        {
+            "name": "tailscale",
+            "image": "tailscale/tailscale:latest",
+            "cpu": 0,
+            "secrets": [
+                {
+                    "name": "TS_AUTHKEY",
+                    "valueFrom": "arn:aws:ssm:us-east-1:928198177604:parameter/Status/TS_AUTHKEY"
+                }
+            ],
+            "portMappings": [
+                {
+                    "name": "tailscale-1055-tcp",
+                    "containerPort": 1055,
+                    "hostPort": 1055,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "restartPolicy": {
+                "enabled": true
+            },
+            "environment": [
+                {
+                    "name": "TS_EXTRA_ARGS",
+                    "value": "--accept-routes --advertise-tags=tag:health-check"
+                },
+                {
+                    "name": "TS_SOCKS5_SERVER",
+                    "value": ":1055"
+                },
+                {
+                    "name": "TS_ACCEPT_DNS",
+                    "value": "true"
+                },
+                {
+                    "name": "TS_HOSTNAME",
+                    "value": "status-ecs"
+                },
+                {
+                    "name": "TS_USERSPACE",
+                    "value": "false"
+                }
+            ],
+            "mountPoints": [
+                {
+                    "sourceVolume": "tun",
+                    "containerPath": "/dev/net/tun",
+                    "readOnly": false
+                }
+            ],
+            "volumesFrom": [],
+            "linuxParameters": {
+                "capabilities": {
+                    "add": [
+                        "NET_ADMIN",
+                        "SYS_MODULE"
+                    ],
+                    "drop": []
+                }
+            },
+            "hostname": "tailscale",
+            "systemControls": []
+        }
+    ],
+    "family": "Status",
+    "networkMode": "bridge",
+    "revision": 14,
+    "volumes": [
+        {
+            "name": "tun",
+            "host": {
+                "sourcePath": "/dev/net/tun"
+            }
+        },
+        {
+            "name": "config",
+            "dockerVolumeConfiguration": {
+                "scope": "shared",
+                "autoprovision": false,
+                "driver": "local"
+            }
+        }
+    ],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "ecs.capability.container-restart-policy"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.17"
+        },
+        {
+            "name": "ecs.capability.docker-plugin.local"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.25"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2"
+    ],
+    "requiresCompatibilities": [
+        "EC2"
+    ],
+    "cpu": "256",
+    "memory": "512",
+    "runtimePlatform": {
+        "cpuArchitecture": "ARM64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "registeredAt": "2025-04-06T16:45:48.167Z",
+    "registeredBy": "arn:aws:sts::928198177604:assumed-role/AWSReservedSSO_AdministratorAccess_45f38d0dea1e89b2/clintkev251",
+    "enableFaultInjection": false,
+    "tags": []
+}
