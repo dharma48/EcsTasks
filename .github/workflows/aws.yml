@@ -58,7 +58,7 @@ jobs:
         aws-region: ${{ env.AWS_REGION }}
 
     - name: Deploy Amazon ECS task definition
-      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v2
       with:
         task-definition: ${{ env.ECS_TASK_DEFINITION }}
         service: ${{ env.ECS_SERVICE }}
