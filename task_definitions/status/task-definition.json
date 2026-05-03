@@ -4,7 +4,7 @@
     "containerDefinitions": [
         {
             "name": "uptime-kuma",
-            "image": "ghcr.io/louislam/uptime-kuma:2.2.1",
+            "image": "ghcr.io/louislam/uptime-kuma:2.3.2",
             "cpu": 0,
             "portMappings": [
                 {
